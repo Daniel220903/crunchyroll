@@ -1,39 +1,37 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
-import DeleteUserForm from './Partials/DeleteUserForm';
-import UpdatePasswordForm from './Partials/UpdatePasswordForm';
+import Header from '@/Components/Header';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
+import UpdatePasswordForm from './Partials/UpdatePasswordForm';
+import DeleteUserForm from './Partials/DeleteUserForm';
 
-export default function Edit({ mustVerifyEmail, status }) {
+export default function Edit({ auth, mustVerifyEmail, status }) {
     return (
-        <AuthenticatedLayout
-            header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Profile
-                </h2>
-            }
-        >
-            <Head title="Profile" />
+        <div className="min-h-screen bg-[#0B0B0B] text-white">
+            <Head title="Ajustes de Perfil" />
+            <Header auth={auth} />
 
-            <div className="py-12">
-                <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                        <UpdateProfileInformationForm
-                            mustVerifyEmail={mustVerifyEmail}
-                            status={status}
-                            className="max-w-xl"
+            <main className="max-w-4xl mx-auto px-6 py-12">
+                <h1 className="text-3xl font-black uppercase italic tracking-tighter border-l-4 border-[#F47521] pl-4 mb-10">
+                    Ajustes de Cuenta
+                </h1>
+
+                <div className="space-y-10">
+                    <div className="bg-[#121212] p-8 rounded-xl border border-white/5 shadow-xl">
+                        <UpdateProfileInformationForm 
+                            mustVerifyEmail={mustVerifyEmail} 
+                            status={status} 
                         />
                     </div>
 
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                        <UpdatePasswordForm className="max-w-xl" />
+                    <div className="bg-[#121212] p-8 rounded-xl border border-white/5 shadow-xl">
+                        <UpdatePasswordForm />
                     </div>
 
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                        <DeleteUserForm className="max-w-xl" />
+                    <div className="bg-[#121212] p-8 rounded-xl border border-red-900/20 shadow-xl">
+                        <DeleteUserForm />
                     </div>
                 </div>
-            </div>
-        </AuthenticatedLayout>
+            </main>
+        </div>
     );
 }
