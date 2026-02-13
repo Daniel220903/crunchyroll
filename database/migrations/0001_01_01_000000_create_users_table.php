@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('avatar')->default('default.png');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

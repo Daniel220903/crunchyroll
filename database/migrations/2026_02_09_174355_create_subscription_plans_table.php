@@ -17,6 +17,7 @@ return new class extends Migration
             // el unsiged evita valores negativos
             $table->decimal('price', 8, 2)->unsigned();
             $table->integer('duration_in_days')->unsigned();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
