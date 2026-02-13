@@ -16,6 +16,7 @@ class User extends Authenticatable
         'email',
         'password',
         'avatar',
+        'role',
     ];
 
     protected $hidden = [
@@ -25,8 +26,18 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
 
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isUser(): bool
+    {
+        return $this->role === 'user';
+    }
 
     public function subscriptions()
     {

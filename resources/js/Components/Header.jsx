@@ -5,6 +5,8 @@ export default function Header({ auth, active = null }) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
+    const isAdmin = auth?.user?.role === 'admin';
+
     return (
         <header className="sticky top-0 z-50 bg-[#0B0B0B]/95 backdrop-blur-md border-b border-white/10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -45,18 +47,22 @@ export default function Header({ auth, active = null }) {
                                         <Link href={route('favorites.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#F47521] hover:text-black font-bold transition">Mis Likes</Link>
                                         <Link href={route('reviews.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#F47521] hover:text-black font-bold transition">Mis Reseñas</Link>
                                         
-                                        <div className="border-t border-white/5 my-2"></div>
-                                        <div className="px-4 py-1">
-                                            <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Gestión</p>
-                                        </div>
+                                        {isAdmin && (
+                                            <>
+                                                <div className="border-t border-white/5 my-2"></div>
+                                                <div className="px-4 py-1">
+                                                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Gestión</p>
+                                                </div>
 
-                                        <Link href={route('users.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Usuarios</Link>
-                                        <Link href={route('genres.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Géneros</Link>
-                                        <Link href={route('seasons.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Temporadas</Link>
-                                        <Link href={route('episodes.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Episodios</Link>
-                                        <Link href={route('payments.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Pagos</Link>
-                                        <Link href={route('subscription-plans.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Planes</Link>
-                                        <Link href={route('subscriptions.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Suscripciones</Link>
+                                                <Link href={route('users.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Usuarios</Link>
+                                                <Link href={route('genres.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Géneros</Link>
+                                                <Link href={route('seasons.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Temporadas</Link>
+                                                <Link href={route('episodes.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Episodios</Link>
+                                                <Link href={route('payments.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Pagos</Link>
+                                                <Link href={route('subscription-plans.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Planes</Link>
+                                                <Link href={route('subscriptions.index')} className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Suscripciones</Link>
+                                            </>
+                                        )}
                                         
                                         <Link 
                                             href={route('logout')} 
@@ -101,17 +107,21 @@ export default function Header({ auth, active = null }) {
                         <Link href={route('watch-history.index')} className="px-8 py-3 text-sm font-bold text-gray-300 hover:text-white transition border-b border-white/5">Historial</Link>
                         <Link href={route('favorites.index')} className="px-8 py-3 text-sm font-bold text-gray-300 hover:text-white transition border-b border-white/5">Favoritos</Link>
                         
-                        <div className="bg-white/5 px-6 py-3 mt-4">
-                            <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em]">Gestión de Admin</p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-px bg-white/5 border-b border-white/5">
-                            <Link href={route('users.index')} className="bg-[#0B0B0B] px-8 py-4 text-xs font-bold text-gray-400 uppercase tracking-tighter hover:text-[#F47521]">Usuarios</Link>
-                            <Link href={route('genres.index')} className="bg-[#0B0B0B] px-8 py-4 text-xs font-bold text-gray-400 uppercase tracking-tighter hover:text-[#F47521]">Géneros</Link>
-                            <Link href={route('seasons.index')} className="bg-[#0B0B0B] px-8 py-4 text-xs font-bold text-gray-400 uppercase tracking-tighter hover:text-[#F47521]">Temporadas</Link>
-                            <Link href={route('episodes.index')} className="bg-[#0B0B0B] px-8 py-4 text-xs font-bold text-gray-400 uppercase tracking-tighter hover:text-[#F47521]">Episodios</Link>
-                            <Link href={route('subscription-plans.index')} className="bg-[#0B0B0B] px-8 py-4 text-xs font-bold text-gray-400 uppercase tracking-tighter hover:text-[#F47521]">Planes</Link>
-                            <Link href={route('subscriptions.index')} className="bg-[#0B0B0B] px-8 py-4 text-xs font-bold text-gray-400 uppercase tracking-tighter hover:text-[#F47521]">Suscripciones</Link>
-                        </div>
+                        {isAdmin && (
+                            <>
+                                <div className="bg-white/5 px-6 py-3 mt-4">
+                                    <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em]">Gestión de Admin</p>
+                                </div>
+                                <div className="grid grid-cols-2 gap-px bg-white/5 border-b border-white/5">
+                                    <Link href={route('users.index')} className="bg-[#0B0B0B] px-8 py-4 text-xs font-bold text-gray-400 uppercase tracking-tighter hover:text-[#F47521]">Usuarios</Link>
+                                    <Link href={route('genres.index')} className="bg-[#0B0B0B] px-8 py-4 text-xs font-bold text-gray-400 uppercase tracking-tighter hover:text-[#F47521]">Géneros</Link>
+                                    <Link href={route('seasons.index')} className="bg-[#0B0B0B] px-8 py-4 text-xs font-bold text-gray-400 uppercase tracking-tighter hover:text-[#F47521]">Temporadas</Link>
+                                    <Link href={route('episodes.index')} className="bg-[#0B0B0B] px-8 py-4 text-xs font-bold text-gray-400 uppercase tracking-tighter hover:text-[#F47521]">Episodios</Link>
+                                    <Link href={route('subscription-plans.index')} className="bg-[#0B0B0B] px-8 py-4 text-xs font-bold text-gray-400 uppercase tracking-tighter hover:text-[#F47521]">Planes</Link>
+                                    <Link href={route('subscriptions.index')} className="bg-[#0B0B0B] px-8 py-4 text-xs font-bold text-gray-400 uppercase tracking-tighter hover:text-[#F47521]">Suscripciones</Link>
+                                </div>
+                            </>
+                        )}
 
                         <Link 
                             href={route('logout')} 
